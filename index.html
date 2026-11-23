@@ -125,7 +125,13 @@ body.rfx25 .it.cx25,body.nofx .it.cx25{animation:none}
 .mon25.mj26{border-color:#ffd34d;box-shadow:0 0 10px #ffd34d88}
 .lk26{background:none;border:none;padding:0;min-height:0;text-decoration:underline;cursor:pointer;color:inherit}
 .chip26{display:inline-block;border:1px solid #5a4a38;border-radius:10px;padding:0 6px;margin:2px;font-size:12px}
-body.rfx25 .ch26c,body.rfx25 .off26b{animation:none}
+#chb.has{border-color:#e7bd4b;color:#e7bd4b;animation:off26 1.6s ease-in-out infinite}
+nav button[data-ch]{position:relative}nav button[data-ch]::after{content:'📦' attr(data-ch);position:absolute;top:2px;right:4px;font-size:10px;background:#e7bd4b;color:#1b1612;border-radius:8px;padding:0 4px;line-height:1.4}
+.ch26x{position:relative;height:64px;text-align:center;margin:6px 0}.ch26x>span{position:absolute;left:50%;top:0;transform:translateX(-50%);font-size:44px;line-height:64px}
+.ch26b1{animation:ch26s .9s ease-in both}.ch26b2{opacity:0;animation:ch26o .5s ease-out .85s both}
+@keyframes ch26s{0%,100%{transform:translateX(-50%)}15%{transform:translateX(-56%) rotate(-8deg)}30%{transform:translateX(-44%) rotate(8deg)}45%{transform:translateX(-55%) rotate(-6deg)}60%{transform:translateX(-46%) rotate(6deg)}90%{opacity:1;transform:translateX(-50%) scale(1.15)}100%{opacity:0;transform:translateX(-50%) scale(1.3)}}
+@keyframes ch26o{0%{opacity:0;transform:translateX(-50%) scale(.6)}60%{opacity:1;transform:translateX(-50%) scale(1.25);filter:drop-shadow(0 0 12px #ffd34d)}100%{opacity:1;transform:translateX(-50%) scale(1);filter:drop-shadow(0 0 6px #ffd34d)}}
+body.rfx25 .ch26b1,body.rfx25 .ch26b2,body.rfx25 #chb.has,body.rfx25 .ch26c,body.rfx25 .off26b{animation:none}
 </style></head><body>
 <div id="app">
 <div id="top"><b id="tn"></b><span id="tl"></span><div class="bar" title="生命"><i id="hb" style="background:#c0392b"></i></div><div class="bar" title="經驗"><i id="xb" style="background:#4d9de0"></i></div><span id="tz"></span><button id="menub" data-a="menuM" aria-label="選單">☰ 選單</button></div>
@@ -133,7 +139,7 @@ body.rfx25 .ch26c,body.rfx25 .off26b{animation:none}
 <section class="v on" id="v-b"><div id="cw"><canvas id="cv"></canvas><div id="ban"></div></div>
 <div id="bp"><div id="tg"></div><div class="bar" style="height:12px;margin:3px 0"><i id="bb" style="background:#e45a5a;width:0"></i></div>
 <div class="sk" id="sk"></div>
-<div><button data-a="spd" data-p='[1]'>1×</button><button data-a="spd" data-p='[2]'>2×</button><button data-a="spd" data-p='[3]'>3×</button><button id="aab" data-a="togAA26">自動推進：開</button><button id="avb" data-a="togAv">自動翻滾：開</button><button id="mutb" data-a="togMute">🔊 音效</button><button id="bbtn" data-a="startBoss">挑戰首領</button></div>
+<div><button data-a="spd" data-p='[1]'>1×</button><button data-a="spd" data-p='[2]'>2×</button><button data-a="spd" data-p='[3]'>3×</button><button id="aab" data-a="togAA26">自動推進：開</button><button id="chb" data-a="chM26">📦 寶箱 0</button><button id="avb" data-a="togAv">自動翻滾：開</button><button id="mutb" data-a="togMute">🔊 音效</button><button id="bbtn" data-a="startBoss">挑戰首領</button></div>
 <div class="mu" id="st"></div><div class="mu" id="lt"></div><div class="lg" id="lg"></div></div></section>
 <section class="v" id="v-h"></section><section class="v" id="v-i"></section><section class="v" id="v-k"></section>
 <section class="v" id="v-p"></section><section class="v" id="v-f"></section><section class="v" id="v-s"></section><section class="v" id="v-t"></section><section class="v" id="v-d"></section><section class="v" id="v-m"></section><section class="v" id="v-e"></section><section class="v" id="v-g"></section><section class="v" id="v-mer"></section><section class="v" id="v-gem"></section><section class="v" id="v-mon"></section><section class="v" id="v-tem"></section><section class="v" id="v-p2"></section><section class="v" id="v-p3"></section><section class="v" id="v-ach"></section><section class="v" id="v-cst"></section>
@@ -3118,7 +3124,7 @@ function b2Tick26(dt){for(const e of EN){if(!e.boss2||e.hp<=0)continue;e.b2c=(e.
 const startBoss26b=startBoss;startBoss=function(){const had=ZS.boss;const r=startBoss26b.apply(this,arguments);try{const b=ZS.boss;if(b&&!had&&b.tl)EN.forEach(e=>{if(e.boss2){e.hp=e.mh=b.mh*.4;e.r=20;e.col=e.col||'#e88b3a'}})}catch(x){}return r};
 /* --- 每格：自動推進、記憶、首領卡招式、慢動作 --- */
 let AAC26=0,AEC26=0;
-const step26=step;step=function(dt){if(SLO26&&typeof T==='number'&&T<SLO26)dt*=.3;step26(dt);try{if(!G||!P.r)return;b2Tick26(dt);AAC26+=dt;if(AAC26>=1){AAC26=0;aa26();memTick26();aaBtn26();if(++AEC26%10===0){try{ae26()}catch(x){}}try{at26()}catch(x){}try{dyTick26()}catch(x){}}}catch(x){}};
+const step26=step;step=function(dt){if(SLO26&&typeof T==='number'&&T<SLO26)dt*=.3;step26(dt);try{if(!G||!P.r)return;b2Tick26(dt);AAC26+=dt;if(AAC26>=1){AAC26=0;aa26();memTick26();aaBtn26();try{chBtn26()}catch(x){}if(++AEC26%10===0){try{ae26()}catch(x){}}try{at26()}catch(x){}try{dyTick26()}catch(x){}}}catch(x){}};
 
 /* --- 夢階之塔預告（42 級） --- */
 const Rp26=R.p;R.p=function(){Rp26.apply(this,arguments);try{if(G.lv>=42&&!G.star){const el=$('#v-p');if(el&&el.insertAdjacentHTML)ins26(el,`<div class="card" style="border-left:4px solid #6ad0c8"><h4>${artIc('icon.tower','🗼',20)} 夢階之塔</h4><span class="mu">墜星神座中央的影子越來越清楚。那是一座通往天空的塔，塔頂連著無數個平行世界。<br>取回全部記憶（擊敗墜星神座首領、到 60 級）後就能登上。</span></div>`)}}catch(x){}};
@@ -3128,7 +3134,8 @@ const Rp26=R.p;R.p=function(){Rp26.apply(this,arguments);try{if(G.lv>=42&&!G.sta
 const CHT26={e:['精英寶箱','#4f8fe8',()=>DT.elite.w,1],b:['首領寶箱','#e7bd4b',()=>[0,0,50,40,10,0],1],d:['每日寶箱','#c05aff',()=>[0,0,0,90,10,0],1]};
 const CHK26={e:'elite',b:'boss',d:'daily'};
 const ch26=()=>{G.ch26=G.ch26||{e:0,b:0,d:0};return G.ch26};
-function chAdd26(k,n){const c=ch26();c[k]=(c[k]||0)+(n||1)}
+function chAdd26(k,n){const c=ch26();c[k]=(c[k]||0)+(n||1);try{if(!G.chTip26){G.chTip26=1;sq23(`<h3 style="margin:0">${artIc('chest.'+CHK26[k],'📦',28)} 獲得${CHT26[k][0]}</h3><p>精英掉的裝備會收進寶箱，可以累積。<br>戰場下方的「📦 寶箱」按鈕，或「裝備」頁最上方，都可以一次開 1 個、10 個或全部。</p><button data-a="chM26">現在打開</button><button data-a="cm">之後再開</button>`)}else ft(P.x,P.y-36,'+'+CHT26[k][0],CHT26[k][1])}catch(x){}chBtn26()}
+function chBtn26(){try{const n=chN26(),b=$('#chb');if(b){const t='📦 寶箱 '+n;if(b.textContent!==t)b.textContent=t;if(b.classList)b.classList.toggle('has',n>0)}const nb=document.querySelector('nav button[data-v="i"]');if(nb&&nb.setAttribute){if(n>0)nb.setAttribute('data-ch',n>99?'99+':String(n));else nb.removeAttribute('data-ch')}}catch(x){}}
 function chN26(){const c=ch26();return(c.e||0)+(c.b||0)+(c.d||0)}
 let CHO26=0,KCX26=null;
 const killE26c=killE;killE=function(e){const p=KCX26;KCX26=e;try{return killE26c.apply(this,arguments)}finally{KCX26=p}};
@@ -3137,9 +3144,9 @@ function chOpen26(k,n){const c=ch26();if(k==='all'){let t=0;for(const q of ['d',
 let CHR26=null;
 function chOpenGo26(k,n,acc){const c=ch26(),d=CHT26[k];if(!acc||!CHR26)CHR26={n0:G.items.length,u0:new Set(G.items.map(i=>i.u)),s0:AS.n,g0:G.gold};CHO26=1;try{for(let i=0;i<n;i++){c[k]--;dropGear(d[2](),k==='e'?0:1)}}finally{CHO26=0}}
 function chShow26(n){const r=CHR26;CHR26=null;if(!r)return;const nw=G.items.filter(i=>!r.u0.has(i.u)).sort((a,b)=>EQ[b.id].rar-EQ[a.id].rar||ilv(b)-ilv(a)),sv=AS.n-r.s0;
- modal(`<h3 style="margin:0">${artIc('chest.boss_open','',28)} 打開 ${n} 個寶箱</h3><div class="ch26r">${nw.slice(0,3).map((it,i)=>`<div class="ch26c" style="animation-delay:${i*.25}s">${tile(it,'itM','',`["${it.u}"]`)}</div>`).join('')||'<span class="mu">（全部被掉落篩選自動分解）</span>'}</div><p>獲得裝備 ${nw.length} 件${sv?`，自動分解 ${sv} 件`:''}${nw.length>3?`｜其中傳說 ${nw.filter(i=>EQ[i.id].rar>=4).length} 件`:''}</p>${chN26()?chBtns26():''}`);try{R.cur()}catch(x){}}
+ chBtn26();modal(`<h3 style="margin:0">打開 ${n} 個寶箱</h3><div class="ch26x"><span class="ch26b1">${artIc('chest.boss','📦',56)}</span><span class="ch26b2">${artIc('chest.boss_open','✨',56)}</span></div><div class="ch26r">${nw.slice(0,3).map((it,i)=>`<div class="ch26c" style="animation-delay:${.9+i*.3}s">${tile(it,'itM','',`["${it.u}"]`)}</div>`).join('')||'<span class="mu">（全部被掉落篩選自動分解）</span>'}</div><p>獲得裝備 ${nw.length} 件${sv?`，自動分解 ${sv} 件`:''}${nw.length>3?`｜其中傳說 ${nw.filter(i=>EQ[i.id].rar>=4).length} 件`:''}</p>${chN26()?chBtns26():''}`);try{R.cur()}catch(x){}}
 function chBtns26(){const c=ch26();return Object.keys(CHT26).filter(k=>c[k]>0).map(k=>`<div style="margin:3px 0">${artIc('chest.'+CHK26[k],'',20)}<b style="color:${CHT26[k][1]}">${CHT26[k][0]} ×${c[k]}</b> <button data-a="chOpen26" data-p='["${k}",1]'>開 1</button>${c[k]>=10?`<button data-a="chOpen26" data-p='["${k}",10]'>開 10</button>`:''}<button data-a="chOpen26" data-p='["${k}","all"]'>全部開</button></div>`).join('')+(Object.keys(CHT26).filter(k=>c[k]>0).length>1?`<button data-a="chOpen26" data-p='["all"]' style="border-color:#e7bd4b">全部寶箱一起開</button>`:'')}
-function chCard26(){const n=chN26();return n?`<div class="card ch26"><h4>${artIc('chest.elite','📦',20)} 寶箱 ${n}</h4><span class="mu">精英掉的裝備會收進精英寶箱，可以累積，有空再一次打開（開出時依掉落篩選自動分解）。</span>${chBtns26()}</div>`:''}
+function chCard26(){const n=chN26();return`<div class="card ch26"><h4>${artIc('chest.elite','📦',20)} 寶箱 ${n}</h4><span class="mu">精英掉的裝備會收進精英寶箱，可以累積，有空再一次打開（開出時依掉落篩選自動分解）。也可以按戰場下方的「📦 寶箱」。</span>${n?chBtns26():'<div class="mu">目前沒有寶箱。打倒精英（名字有顏色、體型較大的怪）就會掉。</div>'}</div>`}
 const Ri26=R.i;R.i=function(){Ri26.apply(this,arguments);try{const el=$('#v-i'),h=chCard26();if(h&&el&&el.insertAdjacentHTML){const s=el.querySelector&&el.querySelector('.subt');if(s&&s.insertAdjacentHTML)s.insertAdjacentHTML('afterend',h);else el.insertAdjacentHTML('afterbegin',h)}}catch(x){}};
 /* --- 每日 3 個目標（懸賞） --- */
 const DYP26={kill:['擊殺 500 隻怪物',500],boss:['擊敗 1 個首領',1],salv:['分解 20 件裝備',20],enh:['強化 3 次',3],gem:['鑲嵌 1 顆星核',1],tl:['在平行世界通過 5 個節點',5]};
@@ -3179,7 +3186,7 @@ offCheck=function(){const dt=(Date.now()-G.t)/1000;if(dt<0){tip('偵測到系統
  modal(`<h3 style="margin:0">歡迎回來</h3><p>離線 <b>${o.h.toFixed(1)}</b> 小時</p><div style="text-align:center"><button class="off26b" data-a="offOpen26">${artIc('chest.boss','📦',40)}<br>打開離線寶箱</button></div>`)};
 function offOpen26(){const o=OFF26;if(!o)return;const its=o.top.map(byU).filter(Boolean);
  modal(`<h3 style="margin:0">離線 ${o.h.toFixed(1)} 小時的收穫</h3><div class="ch26r">${its.map((it,i)=>`<div class="ch26c" style="animation-delay:${i*.3}s">${tile(it,'itM','',`["${it.u}"]`)}</div>`).join('')||'<span class="mu">沒有新裝備</span>'}</div><div class="off26n">擊殺 ${fmtN(o.k)}｜經驗 ${fmtN(o.xp)}｜金幣 ${fmtN(o.gold)}｜${MATN[0]} ×${o.mats}<br>裝備 ${o.gear} 件${o.salv?`（自動分解 ${o.salv} 件）`:''}${o.ch?`｜精英寶箱 +${o.ch}`:''}</div>${chN26()?`<button data-a="chM26">開寶箱（${chN26()}）</button>`:''}${dyCan26()?`<button data-a="dyM26">領取每日</button>`:''}<button data-a="cm">好</button>`)}
-function chM26(){modal(chCard26()||'<p>沒有寶箱</p>')}
+function chM26(){modal(chCard26())}
 
 /* ===== 第 26 版：怪物圖鑑與裝備圖鑑分開 ===== */
 /* 裝備圖鑑 → 裝備頁「圖鑑」分頁；怪物圖鑑 → 地圖頁「怪物」分頁 */
