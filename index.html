@@ -2952,12 +2952,12 @@ function renameGo25(){try{const n=(document.querySelector('#nm25').value||'').tr
 const newGame25=newGame;newGame=function(w){newGame25(w);try{if(NM25){G.name=NM25;NM25=null}G.slot25=SLOT25;if(META25)metaApply25(G,META25);calc()}catch(x){}};
 /* --- 雲端存檔 --- */
 const FB25={apiKey:"AIzaSyDRiX07H2HIwAj9whkFMRTfXP5NFq8in0k",authDomain:"game-a6a3f.firebaseapp.com",projectId:"game-a6a3f",storageBucket:"game-a6a3f.firebasestorage.app",messagingSenderId:"920543413525",appId:"1:920543413525:web:b606c17dd2d1bb9c27d51c"};
-const FBV25='10.12.5';
+const FBV25='10.12.5',FBDB25='default';
 const CL25={st:'off',user:null,last:0,err:'',pend:false,n:0,fb:null};
 const cloudOk25=()=>{try{return!!(FB25&&FB25.apiKey)&&!inFr19()&&/^https?:$/.test(location.protocol)}catch(e){return false}};
 async function fbLoad25(){if(CL25.fb)return CL25.fb;const g=m=>`https://www.gstatic.com/firebasejs/${FBV25}/firebase-${m}.js`,j=m=>`https://cdn.jsdelivr.net/npm/firebase@${FBV25}/${m}/+esm`;let A,U,F;
  try{[A,U,F]=await Promise.all([import(g('app')),import(g('auth')),import(g('firestore'))])}catch(e){[A,U,F]=await Promise.all([import(j('app')),import(j('auth')),import(j('firestore'))])}
- const app=A.initializeApp(FB25),auth=U.getAuth(app),db=F.getFirestore(app);CL25.fb={A,U,F,app,auth,db};return CL25.fb}
+ const app=A.initializeApp(FB25),auth=U.getAuth(app),db=F.getFirestore(app,FBDB25);CL25.fb={A,U,F,app,auth,db};return CL25.fb}
 async function cloudInit25(){if(!cloudOk25()){CL25.st='na';return}try{CL25.st='loading';const f=await fbLoad25();try{await f.U.getRedirectResult(f.auth)}catch(e){}f.U.onAuthStateChanged(f.auth,u=>{CL25.user=u?{uid:u.uid,photo:u.photoURL||''}:null;CL25.st=u?'in':'out';try{if(cur==='s')R.s()}catch(x){}if(u)cloudCheck25()});}catch(e){CL25.st='err';CL25.err=String(e&&e.message||e).slice(0,120)}}
 async function cloudLogin25(){try{const f=await fbLoad25(),p=new f.U.GoogleAuthProvider();try{await f.U.signInWithPopup(f.auth,p)}catch(e){if(/popup|cancel|blocked|operation-not-supported/i.test(String(e&&e.code||e)))await f.U.signInWithRedirect(f.auth,p);else throw e}}catch(e){tip('登入失敗：'+String(e&&e.code||e).slice(0,60))}}
 async function cloudLogout25(){try{const f=await fbLoad25();await f.U.signOut(f.auth);tip('已登出')}catch(e){}}
@@ -2979,7 +2979,7 @@ async function cloudDown25(){try{const f=await fbLoad25(),uid=CL25.user.uid,r=aw
 function cloudCard25(){const s=CL25.st,u=CL25.user;let b='';if(!(FB25&&FB25.apiKey))b='<span class="mu">尚未設定</span>';else if(s==='na')b=`<span class="mu">雲端存檔只在正式網址可用：<b>addiorsoe.github.io/game</b>。這裡請用「匯出存檔／匯入存檔」。</span>`;else if(s==='loading'||s==='off')b='<span class="mu">連線中…</span>';else if(s==='err')b=`<span class="dn">雲端連線失敗：${CL25.err}</span><br><button data-a="cloudInit25">重試</button>`;else if(s==='out')b='<button data-a="cloudLogin25" style="border-color:#4f8fe8">用 Google 登入</button><div class="mu">登入後自動上傳（每 5 分鐘、升級、打倒首領、切換角色、關閉頁面時），3 個角色與共用資料一起保存。只存帳號編號，不存電子郵件或名字。</div>';
  else b=`${u&&u.photo?`<img src="${u.photo}" referrerpolicy="no-referrer" style="width:28px;height:28px;border-radius:50%;vertical-align:middle"> `:''}<b>已登入</b>｜最後上傳 ${ago25(CL25.last)}${CL25.pend?'<span class="dn">（離線，連線後補上傳）</span>':''}<br><button data-a="cloudUpM25">立即上傳</button><button data-a="cloudDown25">從雲端讀取</button><button data-a="cloudLogout25">登出</button>`;
  return`<div class="card"><h4>雲端存檔</h4>${b}</div>`}
-function cloudUpM25(){cloudUp25('manual')}
+function cloudUpM25(){tip('上傳中…');const t=setTimeout(()=>{if(CL25.last<Date.now()-20000)tip('上傳逾時，請檢查網路後再試（'+(CL25.err||'沒有回應')+'）')},20000);cloudUp25('manual').finally(()=>clearTimeout(t))}
 const svCard25=svCard;svCard=function(){return`<div class="card"><h4>角色</h4><b>${G.name||'無名者'}</b>（欄位 ${SLOT25+1}）<br><button data-a="rename25">改名</button><button data-a="slotSwitch25">切換角色</button><button data-a="setRfx25">${G.set.rfx25?'✔':'◻'} 減少裝備特效</button></div>`+cloudCard25()+svCard25()};
 function setRfx25(){G.set.rfx25=G.set.rfx25?0:1;try{document.body.classList.toggle('rfx25',!!G.set.rfx25)}catch(x){}sv();R.s&&R.s()}
 /* 自動上傳時機 */
