@@ -139,6 +139,8 @@ body.rfx25 .ch26b1,body.rfx25 .ch26b2,body.rfx25 #chb.has,body.rfx25 .ch26c,body
 
 .dm28{display:flex;align-items:center;gap:6px;margin:3px 0;font-size:13px}.dm28>span:first-child{width:6.5em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .dm28 .bar26{max-width:none}
+
+.cd29{display:flex;align-items:center;gap:6px}.cd29 .cdb{flex:0 0 90px;height:8px;background:#2a231c;border-radius:4px;overflow:hidden}.cd29 .cdb i{display:block;height:100%}#ca .cd29 b{overflow:visible}#ca .cd29>span:last-child{flex:1;min-width:0}
 </style></head><body>
 <div id="app">
 <div id="top"><b id="tn"></b><span id="tl"></span><div class="bar" title="生命"><i id="hb" style="background:#c0392b"></i></div><div class="bar" title="經驗"><i id="xb" style="background:#4d9de0"></i></div><span id="tz"></span><button id="menub" data-a="menuM" aria-label="選單">☰ 選單</button></div>
@@ -575,7 +577,7 @@ let G=null,S={};
 const DB=()=>new Promise((a,b)=>{const r=indexedDB.open('ashen',1);r.onupgradeneeded=()=>r.result.createObjectStore('s');r.onsuccess=()=>a(r.result);r.onerror=()=>b()});
 async function sv(){if(!G)return;const j=JSON.stringify(G);try{const d=await DB();d.transaction('s','readwrite').objectStore('s').put(j,'g')}catch(e){}try{localStorage.setItem('ashen_bk',j)}catch(e){}}
 async function ld(){try{const d=await DB();const r=await new Promise(a=>{const q=d.transaction('s').objectStore('s').get('g');q.onsuccess=()=>a(q.result);q.onerror=()=>a(null)});if(r)return JSON.parse(r)}catch(e){}try{const r=localStorage.getItem('ashen_bk');if(r)return JSON.parse(r)}catch(e){}return null}
-function mig(g){if(!g.v)g.v=1;g.cls='無名者';g.sz=g.sz||0;if(g.lv>=60)g.star=1;g.specs=g.specs||[];g.ld=g.ld||{};g.set=Object.assign({sp:1,fl:0,fx:0,fs:0,vol:.5,av:1,mute:0},g.set||{});g.rift=g.rift||{d:1,aff:[]};g.cond=g.cond||{};g.sk=g.sk||[];g.br=g.br||{};g.tal=g.tal||{};if(g.v<3){g.tal={};g.br={};g.v=3}if(g.v<6){g.tal={};g.v=6}g.sup=g.sup||[[null,null],[null,null],[null,null],[null,null]];g.bossK=g.bossK||Array(8).fill(0);tlInit(g);v12Init(g);v13Init(g);v15Init(g);v16Init(g);v18Init(g);v19Init(g);v20Init(g);v21Init(g);v22Init(g);v23Init(g);v24Init(g);v25Init(g);v26Init(g);v27Init(g);v28Init(g);v17Init(g);g.kps=g.kps||.15;g.seq=g.seq||1;g.ess=g.ess||0;g.codex=g.codex||{};(g.items||[]).forEach(it=>{if(!it.mods)it.mods=(EQ[it.id]?EQ[it.id].mods:[]).slice();g.codex[it.id]=1});return g}
+function mig(g){if(!g.v)g.v=1;g.cls='無名者';g.sz=g.sz||0;if(g.lv>=60)g.star=1;g.specs=g.specs||[];g.ld=g.ld||{};g.set=Object.assign({sp:1,fl:0,fx:0,fs:0,vol:.5,av:1,mute:0},g.set||{});g.rift=g.rift||{d:1,aff:[]};g.cond=g.cond||{};g.sk=g.sk||[];g.br=g.br||{};g.tal=g.tal||{};if(g.v<3){g.tal={};g.br={};g.v=3}if(g.v<6){g.tal={};g.v=6}g.sup=g.sup||[[null,null],[null,null],[null,null],[null,null]];g.bossK=g.bossK||Array(8).fill(0);tlInit(g);v12Init(g);v13Init(g);v15Init(g);v16Init(g);v18Init(g);v19Init(g);v20Init(g);v21Init(g);v22Init(g);v23Init(g);v24Init(g);v25Init(g);v26Init(g);v27Init(g);v28Init(g);v29Init(g);v17Init(g);g.kps=g.kps||.15;g.seq=g.seq||1;g.ess=g.ess||0;g.codex=g.codex||{};(g.items||[]).forEach(it=>{if(!it.mods)it.mods=(EQ[it.id]?EQ[it.id].mods:[]).slice();g.codex[it.id]=1});return g}
 /* ===== 裝備與數值 ===== */
 const byU=u=>G.items.find(i=>i.u===u),inst=u=>EQ[byU(u).id];
 const homeOk=(b,z)=>typeof b.home==='number'?true:String(b.home)[0]==='t'?(tlOn()&&G.tl.cur===+String(b.home).slice(1)):false;
@@ -1098,7 +1100,7 @@ int:{n:'智力專精',k:'魔力與智力',c:'#6aa0ff',ab:[['魔力洪流','每 2
 vit:{n:'體質專精',k:'生命',c:'#6fcf6f',ab:[['生命鋒芒','獲得最大生命 2% 的攻擊力'],['生生不息','每秒回復最大生命 1%'],['瀕死守護','生命低於 30% 時：受到傷害 -30%、吸血 +5%']]},
 dot:{n:'異常專精',k:'異常',c:'#b070e0',ab:[['纏身之毒','異常持續時間 +50%，持續傷害 ×1.4'],['異常擴散','敵人死亡時，將身上的燃燒／腐蝕／流血／冰冷（最多 3 層）、麻痺與暗蝕擴散給 120 範圍內的敵人'],['異常共鳴','敵人身上每種異常狀態（燃燒、腐蝕、流血、冰冷、麻痺、暗蝕）使你對其傷害 +12%']]},
 sum:{n:'召喚專精',k:'召喚物',c:'#e7bd4b',ab:[['亡者增援','每次召喚額外 +2 隻，召喚物上限 8→10，召喚物傷害 ×1.4'],['殉爆','召喚物時間結束時引爆，對 80 範圍造成 150% 暗影爆炸傷害'],['狂熱亡靈','召喚物攻擊速度 +50%、傷害 ×1.3']]}};
-const SPFX={fire:[{bnm:.5},{cb:.25},{kb:1}],frost:[{frzm:.6},{cc:.25},{ch2:1}],storm:[{shv:.15},{arc:.25},{arcs:2}],blood:[{blm:.4},{cbl:.25},{lsl:.06}],shadow:[{dka:.15},{cdk:.25},{kh:.03}],toxin:[{cpc:4},{cpp:.03},{ksw:1}],brute:[{pen:.3},{hi:.3},{stn:.15}],marks:[{far:.25},{dbl:.15},{krs:.1}],duelist:[{nr:.2},{ex:.4},{thx:.2}],vanguard:[{el:.25},{keh:.1},{uq28:.25}],swift:[{dcd:.3},{dbf:.25},{inv:.17}],berserk:[{lw:.3},{kh2:.3},{ls10:.02}],arcane:[{mf:.2},{mpm:.3,mpg:.4},{kmp:.03}],combo:[{cmb:.01},{cmbas:.25},{cmbc:10}],fortune:[{gmm:.4},{xpm:.25},{findp:.4}],prism:[{prs:.15},{rxm:.4},{rrx:.3}],bulwark:[{big:.5},{rf:.1},{shm:.5}]};
+const SPFX={fire:[{bnm:.5},{cb:.25},{kb:1}],frost:[{frzm:.6},{cc:.25},{ch2:1}],storm:[{shv:.15},{arc:.25,arc29:1},{arcs:2}],blood:[{blm:.4},{cbl:.25},{lsl:.06}],shadow:[{dka:.15},{cdk:.25},{kh:.03}],toxin:[{cpc:4},{cpp:.03},{ksw:1}],brute:[{pen:.3},{hi:.3},{stn:.15}],marks:[{far:.25},{dbl:.15},{hr29:3}],duelist:[{nr:.2},{ex:.4},{thx:.2}],vanguard:[{el:.25},{keh:.1},{uq28:.25}],swift:[{dcd:.3},{dbf:.25},{inv:.17}],berserk:[{lw:.3},{kh2:.3},{ls10:.02}],arcane:[{mf:.2},{mpm:.3,mpg:.4},{kmp:.03}],combo:[{cmb:.01},{cmbas:.25},{cmbc:10}],fortune:[{gmm:.4},{xpm:.25},{findp:.4}],prism:[{prs:.15},{rxm:.4},{rrx:.3}],bulwark:[{big:.5},{rf:.1},{shm:.5}]};
 Object.assign(SPEC,{
 fire:{n:'焚燒專精',k:'燃燒',c:'#ff7a2a',ic:'🔥',ab:[['烈焰煉獄','燃燒傷害 ×1.5'],['灼身','對燃燒中的敵人傷害 +25%'],['焚爆','燃燒中的敵人死亡時爆炸，造成 100% 火焰傷害（範圍 80）']]},
 frost:{n:'凜冬專精',k:'冰冷',c:'#9fdcff',ic:'❄️',ab:[['永凍','冰凍持續時間 +60%'],['脆弱','對冰冷／冰凍中的敵人傷害 +25%'],['速凍','冰冷累積 2 層即冰凍（原本 3 層）']]},
@@ -1125,7 +1127,7 @@ if(X.lw&&P.hp<S.hp*.5)m*=1+X.lw;if(X.ls10)m*=1+X.ls10*Math.floor((1-P.hp/S.hp)*1
 if(X.cmb)m*=1+X.cmb*(P.cmbn||0);return m}
 function spHit(e,v,el,cr,m){const X=S.sx;if(!X.on)return;
 if(X.cmb||X.cmbas||X.cmbc){P.cmbn=Math.min(20+(X.cmbc||0),(P.cmbn||0)+1);P.cmbt=3}
-if(X.arc&&el==='elec'&&rnd()<X.arc){const q=EN.find(x=>x!==e&&x.hp>0&&Math.hypot(x.x-e.x,x.y-e.y)<130);if(q){DD.push({a:[e.x,e.y,q.x,q.y],t:.2});hitE(q,.6,'elec',{al:1,dot:1,nore:1,noap:1,noex:1})}}
+if(X.arc&&el==='elec'&&rnd()<X.arc){EN.filter(x=>x!==e&&x.hp>0&&Math.hypot(x.x-e.x,x.y-e.y)<130).slice(0,1+(X.arc29||0)).forEach(q=>{DD.push({a:[e.x,e.y,q.x,q.y],t:.2});hitE(q,X.arc29?.8:.6,'elec',{al:1,dot:1,nore:1,noap:1,noex:1})})}
 if(X.dbl&&rnd()<X.dbl)hitE(e,m*.5,el,{al:1,dot:1,nore:1,noap:1,noex:1});
 if(X.stn&&cr&&el==='phys'&&!e.boss&&rnd()<X.stn)e.fz=Math.max(e.fz||0,.8)}
 function spKill(e){const X=S.sx;if(!X.on)return;
@@ -1239,7 +1241,7 @@ A('裝備','全部換最佳','• 角色頁的「全部換最佳」會逐格比�
 A('裝備','夢染與神化','• 兩者都是「終極打造」：做完後裝備封印，不能再強化、洗鍊、融合\n• 夢染（3000×(1＋物品等級÷20) 金＋精華 ×2）：60% 加上 1 條特殊詞綴；25% 加上特殊詞綴但 1 條隨機詞綴降 1 階；15% 沒有變化（仍然封印）。特殊詞綴有更多傷害 3.5～7%、暴擊率、暴擊傷害 12～25%、攻速、減傷 2～4%、吸血、召喚物、持續、範圍、掉寶、移速、冷卻，數值隨物品等級成長；裝備顯示「污」\n• 神化（5000×(1＋物品等級÷20) 金＋精華 ×(1＋稀有度)）：全部隨機詞綴升 1 階並再 ×1.08，T1 改為 ×1.35×1.08；傳說與神話的固定效果另外 ×1.2；裝備顯示「神」\n• 夢染的上限較高但有風險，神化穩定；兩者只能擇一\n• 建議先把強化與洗鍊做到滿意再使用');
 A('裝備','鍛造篩選','• 鍛造頁上方列出目前已裝備的物品，點一下直接選為鍛造對象\n• 「更換裝備」視窗可依欄位篩選、只看已裝備、用名稱搜尋；已裝備的物品排在最前面並標示 E');
 A('終局','區域精通與圖鑑收藏','• 開啟終極星圖後，7 個舊區域各有 5 星精通（依序達成）：★1 擊殺 300 隻（歸屬權重 ×5）、★2 擊敗該區首領 3 次（星燼 ×2）、★3 撿到 3 件歸屬傳說（追獵保底 45）、★4 擊殺 1000 隻（星燼 ×5）、★5 收集該區全部歸屬傳說（該區首領專屬傳說的第 1 條詞綴必為 T1）\n• 星燼每 12 個換永久天賦點 +1，最多 +5\n• 圖鑑收藏：收集某區全部歸屬傳說得永久加成（灰星海岸金幣 +10%、腐沼異常持續 +10%、霜葬暴擊傷害 +10%、雷鑄攻速 +4%、血宴生命 +5%、虛空範圍 +8%、墜星全傷害 +5%）；首領專屬全收對首領傷害 +10%；平行世界專屬全收夢蝕金幣 +10%');
-A('終局','灰燼夢蝕','• 每擊敗一次界主，該線夢蝕 +4（可在平行世界詳情關閉）\n• 每 1 點夢蝕：怪物生命與攻擊 +2%、金幣 +1%；史詩與傳說的掉落權重隨夢蝕提高，神話機率 +0.2%（上限 25%）\n• 夢蝕 100 以後收益遞減，夢蝕 60 以後怪物加速變強：傳說與史詩權重每點只再 +1/300、金幣每點 +0.5%；怪物生命與攻擊從夢蝕 60 起再乘 1.015^(夢蝕−60)（夢蝕 100 約 ×1.8、150 約 ×3.8、200 約 ×8）\n• 夢蝕 100 以上掉落的 Lv60 裝備，T1 詞綴有機會變成只能掉落的 T0（數值 1.7～2.1 倍基準，夢蝕越高機率越高，最多 12%；夢蝕祭壇燃燒期間 ×1.5）\n• 夢蝕 100 以上，首領給「大烙印」（數值 ×1.5），神話保底縮短\n• 能力有上限（每條線 1 個烙印），難度沒有上限；最高夢蝕會記錄下來');
+A('終局','灰燼夢蝕','• 每擊敗一次界主，該線夢蝕 +3～+9：每輪倒數 12 分鐘，剩越多加越多，剩一半以上另給星燼 +1、首領寶箱 +1（可在平行世界詳情關閉）\n• 每 1 點夢蝕：怪物生命與攻擊 +2%、金幣 +1%；史詩與傳說的掉落權重隨夢蝕提高，神話機率 +0.2%（上限 25%）\n• 夢蝕 100 以後收益遞減，夢蝕 60 以後怪物加速變強：傳說與史詩權重每點只再 +1/300、金幣每點 +0.5%；怪物生命與攻擊從夢蝕 60 起再乘 1.015^(夢蝕−60)（夢蝕 100 約 ×1.8、150 約 ×3.8、200 約 ×8）\n• 夢蝕 100 以上掉落的 Lv60 裝備，T1 詞綴有機會變成只能掉落的 T0（數值 1.7～2.1 倍基準，夢蝕越高機率越高，最多 12%；夢蝕祭壇燃燒期間 ×1.5）\n• 夢蝕 100 以上，首領給「大烙印」（數值 ×1.5），神話保底縮短\n• 能力有上限（每條線 1 個烙印），難度沒有上限；最高夢蝕會記錄下來');
 A('裝備','掉落篩選','• 在設定頁開啟。沒通過篩選的掉落直接分解成材料與金幣，離線收益也適用\n• 可設定：最低保留稀有度、只留目前武器類型的主手、必須含有某類詞綴（火焰、冰冷、暴擊、生命、護甲、攻速…）；含 T0 詞綴的裝備預設一律保留（可關閉）\n• 傳說與神話一律保留；鍛造、合成、融合的成品不受影響');
 A('裝備','神話獨有詞條','• 萬象法杖「萬象」：每次元素反應傷害 +6%，最多 11 層\n• 終焉之弓「終焉」：投射物 +2 但不穿透，更多傷害 ×1.4\n• 滅世巨斧「滅世」：近戰命中 25% 引發 80% 火焰餘震（內置冷卻 0.3 秒）\n• 不朽戰甲「不朽」：致命傷改為保留 50% 生命並無敵 2 秒（冷卻 60 秒）\n• 灰燼誓約劍「灰燼誓約」（肉生之界）：每次翻滾後 3 秒內近戰傷害 ×1.4，可疊 2 層\n• 元素之心「元素之心」：每 4 秒輪替一種元素，該元素傷害 ×1.6\n• 萬物之戒「萬物」：每件已裝備的傳說以上物品，更多傷害 +5%（至少以 6 件計算）、生命 +4%\n• 每件已裝備的神話：最大生命 +15%\n• 獨有詞條不能被融合帶走');
 A('區域','離線收益','• 離線最多結算 24 小時，超過 8 小時的部分效率減半\n• 效率 = min(在線平均擊殺效率, 0.2/秒) × 0.75；每 10 次擊殺擲一次精英掉落（60%），裝備最多 60 件，會套用掉落篩選');
@@ -1387,7 +1389,7 @@ function tlBossWin(e){const t=G.tl,l=t.cur,c=t.c[l];G.st.tlb++;if(t.anc)t.anc[l]
  t.pity[l]++;const my=TLN[l].my.map(MYI).filter(i=>i>=0);if(my.length&&(rnd()<Math.min(.15,.07+c/800)||t.pity[l]>=tlPityN(l))){const it=genItem(pick(my));cx23(it,.15);addItem(it);t.pity[l]=0;logm('界主掉落神話：'+EQ[it.id].n,'#ff5ad0');ban('神話掉落：'+EQ[it.id].n,'#ff5ad0')}
  const pl=TLN[l].bl,bi=ri(0,pl.length-1),p=pl[bi],big=c>=100,v0=p[1]+rnd()*(p[2]-p[1]),v=(p[0]==='mcnt'?Math.round(v0):+(v0*(big?1.5:1)).toFixed(p[1]>=1?0:3)),nb=[bi,v,big?1:0];
  if(!t.bl[l]){t.bl[l]=nb;logm('獲得烙印：'+tlBlessTxt(l,nb),'#e7bd4b')}else t.pend=[l,nb];
- if(t.cu[l]){t.c[l]+=4;t.best=Math.max(t.best,t.c[l])}
+ if(t.cu[l]){t.c[l]+=cdGain29(l);t.best=Math.max(t.best,t.c[l])}
  ban('擊敗界主：'+e.n,'#ffd34d');logm('擊敗界主 '+e.n+'｜'+TLN[l].n+' 夢蝕 '+t.c[l],'#ffd34d');calc();if(t.pend)setTimeout(tlPendM,50)}
 function tlPendM(){const t=G.tl;if(!t.pend)return;const[l,nb]=t.pend;modal(`<h3 style="margin:0">新的烙印</h3><div class="mu">${TLN[l].n}每次只能保留 1 個烙印</div>${kv([['目前',tlBlessTxt(l,t.bl[l])],['新獲得',tlBlessTxt(l,nb)]])}<button data-a="tlKeep" data-p='[1]'>換成新烙印</button><button data-a="tlKeep" data-p='[0]'>保留目前烙印</button>`,'pend')}
 function tlKeep(y){const t=G.tl;if(!t.pend)return;const[l,nb]=t.pend;if(y)t.bl[l]=nb;t.pend=null;calc();cm();logm(y?'換上烙印：'+tlBlessTxt(l,nb):'保留原本的烙印','#e7bd4b')}
@@ -1395,8 +1397,8 @@ function tlShopM(){const l=EQ.map((b,i)=>[b,i]).filter(([b,i])=>b.rar===4&&G.cod
 function tlBuy(i){const t=G.tl;if(t.sh<SHARD_C){tip('星燼不足（需要 '+SHARD_C+' 個）');return}if(!payG(20000,'兌換傳說'))return;t.sh-=SHARD_C;const it=genItem(i,60);addItem(it);logm('兌換傳說：'+EQ[i].n,'#e88b3a');tlShopM()}
 function tlM(l){const t=G.tl,d=TLN[l],b=B[d.z],my=d.my.join('、'),on=t.cur===l;
 modal(`<h3 style="margin:0;color:${d.c}">${d.n}</h3><div class="mu">${d.d}｜來源：${ZN[d.z][0]}（Lv60）</div>
-<div class="card">${kv([['夢蝕',`${t.c[l]}（怪物生命與攻擊 +${t.c[l]*2}%，稀有度與金幣提高）`],['錨定度',`${t.st[l]}%（每通過一個節點 +20%，滿 100% 可挑戰首領）`],['首領',`強化・${b[0]}`],['可掉神話',`${my}（保底 ${t.pity[l]}/${tlPityN(l)}）`],['目前烙印',tlBlessTxt(l,t.bl[l])],['已擊敗首領',t.kc[l]+' 次']])}
-<button data-a="tlTogC" data-p='[${l}]'>${t.cu[l]?'擊敗首領後夢蝕 +4（點擊改為不增加）':'擊敗首領後夢蝕不變（點擊改為 +5）'}</button></div>
+<div class="card">${kv([['夢蝕',`${t.c[l]}（怪物生命與攻擊 +${t.c[l]*2}%，稀有度與金幣提高）`],['錨定度',`${t.st[l]}%（每通過一個節點 +20%，滿 100% 可挑戰首領）`],['首領',`強化・${b[0]}`],['可掉神話',`${my}（保底 ${t.pity[l]}/${tlPityN(l)}）`],['目前烙印',tlBlessTxt(l,t.bl[l])],['已擊敗首領',t.kc[l]+' 次'],['本輪倒數',cdTxt29(l)],['最快擊敗',G.tl.fs29&&G.tl.fs29[l]?cdFmt29(G.tl.fs29[l]):'—'],['最高夢蝕',(G.tl.hi29&&G.tl.hi29[l])||t.c[l]]])}
+<button data-a="tlTogC" data-p='[${l}]'>${t.cu[l]?'擊敗首領後夢蝕 +3～+9，越快越多（點擊改為不增加）':'擊敗首領後夢蝕不變（點擊改為增加）'}</button></div>
 <div class="card"><b>目前節點：${tlNodeTxt(t.node[l])}</b><div class="mu">${tlNodeDesc(t.node[l])}｜每 ${TLK} 次擊殺通過一次，會自動重複目前節點（星痕只生效一次）${on?`｜進度 ${t.nk}/${TLK}`:''}</div>
 <b>下一批可選節點</b>（獎勵事先顯示，點擊即換）<div class="chiprow">${t.off[l].map((o,i)=>`<button data-a="tlPick" data-p='[${l},${i}]' title="${tlNodeDesc(o)}">${tlNodeTxt(o)}</button>`).join('')}</div></div>
 <div class="card"><b>烙印池</b>（擊敗首領隨機獲得 1 種，數值在範圍內隨機；夢蝕 100 以上為大烙印 ×1.5）${ul(d.bl.map(p=>`${KN[p[0]]} +${fmt(p[0],p[1])}～${fmt(p[0],p[2])}`))}</div>
@@ -1808,7 +1810,7 @@ S.em5={};if(ks.q_melt)S.sx.cpp=(S.sx.cpp||0)+.05}
 function k17F(S){const ks=S.ks;
 if(ks.q_legion)S.mnm*=.85;if(ks.q_soul)S.mcap=Math.max(1,S.mcap-1);
 if(ks.q_surge)S.hp*=.95;if(ks.q_shade||ks.q_phant)S.hp*=.95;if(ks.q_tstep)S.hp*=.92;
-if(ks.q_devour)S.rg*=.5;if(ks.q_ltb)S.rg*=.5;if(ks.q_thirst)S.rg*=.75;if(ks.q_life){S.rg*=2;S.ls=0}if(ks.q_ltb)S.ls*=2;
+if(ks.q_devour)S.rg*=.5;if(ks.q_thirst)S.rg*=.75;if(ks.q_life){S.rg*=2;S.ls=0}
 if(ks.q_bsac){S.more*=1+.2*ks.q_bsac;S.mpr=0}if(ks.q_stun)S.more*=.95;if(ks.q_eov)S.more*=.9;if(ks.q_thorn)S.more*=.95;
 if(ks.q_miasma)S.mv-=.05;if(ks.q_iarm){S.ar*=1.3;S.mv-=.15}if(ks.q_melt)S.ar*=.8;if(ks.q_mount){S.ar*=1.4}
 if(ks.q_plague)S.pr.corr*=.8;if(ks.q_shat)S.pr.ice*=.9;if(ks.q_amp)S.sdur=(S.sdur||0)-.25;
@@ -3471,11 +3473,59 @@ function dmM28(){const d=dm5m28(),ks=Object.keys(d).filter(k=>d[k]>0).sort((a,b)
 const step28=step;step=function(dt){const r=step28.apply(this,arguments);try{bp28Tick()}catch(e){}return r};
 
 try{CHL.unshift(['v28','2026-11-23','推薦照強弱排序、逐技能傷害統計、60 級首領',['推薦：同一專精的能力照強度排序（例如冰系先推薦脆弱），生存改推鋼鐵（近戰盾擊、遠程磐石之軀），天賦群最多 3 個','推薦卡多一行「如果改用某技能，會變成某型」','戰場 DPS 可以點開，看最近 5 分鐘各技能的傷害佔比；推薦改用傷害佔比判斷','殘神之軀：隕石雨一半落在隨機位置、飛行俯衝傷害 ×0.75、自動翻滾對隕石雨的反應率 +15%','召喚專精再下修；冰相星核武器加成 ×0.8','神話：界主保底 8 → 12 次；覆界之瞳第一次必掉，之後 30%','鮮血群新質變「血契」','重做：聖療（治療量 50% 轉成下一擊傷害）、異常擴散（傳給附近 2 隻敵人）、不屈（生命低於 30% 時減傷 25%，冷卻 20 秒）']])}catch(x){}
+/* ===== 第 29 版：平行世界倒數計時、第 28 版審查 ===== */
+VER='v29';try{VERD='2026-11-23'}catch(x){}
+/* --- 倒數：每輪 12 分鐘（遊戲內時間，離線、不在平行世界時不走） --- */
+const CD29=720;
+function cdT29(){const t=G.tl;t.cd29=t.cd29||[0,0,0,0,0];return t.cd29}
+function cdRem29(l){return Math.max(0,1-(cdT29()[l]||0)/CD29)}
+function cdGain29(l){return Math.max(3,Math.min(9,Math.round(3+6*cdRem29(l))))}
+const cdFmt29=s=>{s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+function cdTxt29(l){const r=cdRem29(l);return r>0?`剩 ${cdFmt29(CD29*r)}（現在擊敗：夢蝕 +${cdGain29(l)}）`:`時間到（擊敗：夢蝕 +3）`}
+function cdTick29(dt){try{if(!G||!G.tl||!tlOn()||P.dead>0)return;const l=G.tl.cur;if(l<0||l===undefined)return;const a=cdT29();a[l]=(a[l]||0)+dt}catch(e){}}
+/* 擊敗界主：先算夢蝕（cdGain29 在 tlBossWin 內呼叫），再發速通獎勵、記錄，最後重設倒數 */
+const tlBossWin29=tlBossWin;tlBossWin=function(e){const t=G.tl,l=t.cur,el=cdT29()[l]||0,rem=cdRem29(l),g=cdGain29(l);const r=tlBossWin29.apply(this,arguments);
+ try{t.fs29=t.fs29||[0,0,0,0,0];t.hi29=t.hi29||[0,0,0,0,0];if(!t.fs29[l]||el<t.fs29[l])t.fs29[l]=el;t.hi29[l]=Math.max(t.hi29[l]||0,t.c[l]);t.bf29=Math.max(t.bf29||0,rem);
+  if(t.cu[l])logm('倒數剩 '+Math.round(rem*100)+'%：夢蝕 +'+g,'#ffd34d');
+  if(rem>=.5){t.sh+=1;chAdd26('b',1);ban('速通獎勵：星燼 +1、首領寶箱 +1','#7fe08a');logm('速通獎勵（剩 '+Math.round(rem*100)+'%）：星燼 +1、首領寶箱 +1','#7fe08a')}
+  cdT29()[l]=0}catch(x){}return r};
+ACH.push(['tl50','一半時間','平行世界倒數剩一半以上擊敗界主',()=>G.tl&&(G.tl.bf29||0)>=.5],['tl75','疾行者','平行世界倒數剩 75% 以上擊敗界主',()=>G.tl&&(G.tl.bf29||0)>=.75]);
+/* 戰場：倒數條 */
+const goal29=goal21;goal21=function(){const r=goal29();try{if(tlOn()&&G.tl&&G.tl.cur>=0){const l=G.tl.cur,rm=cdRem29(l),c=rm>=.5?'#5fd07a':rm>=.25?'#e7c84b':rm>0?'#e45a5a':'#777';return`<div class="goal21 cd29">⏳<span class="cdb"><i style="width:${Math.round(rm*100)}%;background:${c}"></i></span><span>${rm>0?'剩 '+cdFmt29(CD29*rm):'時間到'}｜現在擊敗界主：夢蝕 <b>+${G.tl.cu[l]?cdGain29(l):0}</b>${rm>=.5?'＋速通':''}</span></div>`}}catch(x){}return r};
+/* --- P0-1：元素互動型推薦固定兩個元素群＋異常群；點數夠才加副型群 --- */
+const cl29=cl28;cl28=function(p){const a=ty27(p.main);if(!(a&&a.rx&&a.el))return cl29(p);
+ const o=[];a.el.forEach(e=>{const c=ELC27[e];if(c!==undefined&&!o.some(x=>x[0]===c))o.push([c,1])});if(!o.some(x=>x[0]===4))o.push([4,1]);
+ try{const b=p.sec?ty27(p.sec):null,cs=o.map(x=>x[0]),need=TN.filter(n=>!n.ks&&n.arm>=0&&cs.includes(n.arm)).reduce((t,n)=>t+(n.cost||1),0)+9,have=tpts()+Object.keys(G.tal||{}).filter(k=>TBY[k]).reduce((t,k)=>t+(TBY[k].cost||0),0);
+  if(b&&have>need){const sb=b.cl.find(c=>!cs.includes(c));if(sb!==undefined)o.push([sb,.4])}}catch(e){}return o};
+/* --- P0-2：血契不扣血；生命 >60% 鮮血技能 +20%，<60% 吸血 +2% --- */
+bp28Tick=function(){};
+const k20M29=k20M;k20M=function(e,el,o){let m=k20M29(e,el,o);try{if(S.ks&&S.ks.q_bpact&&P.hp>S.hp*.6&&(el==='blood'||(o&&o.el0==='blood')))m*=1.2/1.25}catch(x){}return m};
+const k19Ls29=k19Ls;k19Ls=function(){let v=k19Ls29();try{if(S.ks&&S.ks.q_bpact&&P.hp<S.hp*.6)v+=.02}catch(x){}return v};
+/* --- P1-3：壁壘、嗜血、狩獵節奏 --- */
+/* 壁壘：護盾存在時傷害 +15%（原本就有）；另外沒有護盾時每 8 秒自動得到 10% 最大生命的護盾，讓它在沒帶護盾技能時也有用 */
+let BW29=0;function bw29Tick(){if(!S||!S.ks||!S.ks.q_bulw||P.dead>0)return;if((P.sh||0)<=0&&T>=BW29){BW29=T+8;P.sh=S.hp*.1;ft(P.x,P.y-24,'壁壘','#8cf')}}
+/* 嗜血：每擊殺回復 1% 生命，傷害 +3%（最多 5 層，5 秒） */
+const killE29=killE;killE=function(e){const was=e&&e.hp<=0&&!e.dd29;const r=killE29.apply(this,arguments);try{if(was&&S.ks&&S.ks.q_ltb&&!e.crys){e.dd29=1;heal(S.hp*.01);P.lt29=Math.min(5,(T<(P.lt29T||0)?P.lt29||0:0)+1);P.lt29T=T+5}}catch(x){}return r};
+const k20M29b=k20M;k20M=function(e,el,o){let m=k20M29b(e,el,o);try{if(S.ks&&S.ks.q_ltb&&T<(P.lt29T||0))m*=1+.03*(P.lt29||0)}catch(x){}return m};
+/* 狩獵節奏：每 3 次投射命中，下一次投射必定暴擊 */
+const hitE29=hitE;hitE=function(e,m,el,o){o=o||{};const X=S.sx||{};if(X.hr29&&!o.dot&&!o.al&&o.tags&&o.tags.includes('投射物')){if((P.hr29||0)>=X.hr29){P.hr29=0;const c0=S.crit;S.crit=9;try{return hitE29.apply(this,arguments)}finally{S.crit=c0}}P.hr29=(P.hr29||0)+1}return hitE29.apply(this,arguments)};
+/* 文字 */
+SPEC.storm.ab[1]=['雷弧','閃電命中有 25% 機率放電弧，連到 2 名敵人，各造成 80% 傷害'];
+SPEC.marks.ab[2]=['狩獵節奏','每 3 次投射命中，下一次投射必定暴擊'];
+try{TN.forEach(n=>{if(n.id==='q_bpact')n.d='生命高於 60% 時，鮮血技能傷害 +20%；生命低於 60% 時，吸血 +2%（無代價）';if(n.id==='q_ltb')n.d='每擊殺 1 隻怪物，回復 1% 生命，並且傷害 +3%（最多 5 層，5 秒）';if(n.id==='q_bulw')n.d='護盾存在時傷害 +15%；沒有護盾時，每 8 秒自動獲得 10% 最大生命的護盾'})}catch(x){}
+/* P2-2：DPS 佔比面板說明 */
+const dmM29=dmM28;dmM28=function(){dmM29();try{const m=$('#md'),bt=m&&m.querySelector&&m.querySelector('button[data-a="cm"]'),tg=bt&&bt.insertAdjacentHTML?bt:m,pos=tg===bt?'beforebegin':'beforeend';if(tg&&tg.insertAdjacentHTML)tg.insertAdjacentHTML(pos,'<div class="card" style="border-left:4px solid #ffd34d"><b>推薦依這個佔比計算</b><div class="mu">天賦頁「依技能推薦」和專精頁的推薦，會照最近 5 分鐘各技能的傷害佔比決定比重：傷害越高的技能，它的標籤和元素越重要。換了用法，推薦也會跟著變。</div></div>')}catch(x){}};
+/* 每幀 */
+const step29=step;step=function(dt){const r=step29.apply(this,arguments);try{cdTick29(dt);bw29Tick()}catch(e){}return r};
+function v29Init(g){try{if(g.tl){g.tl.cd29=g.tl.cd29||[0,0,0,0,0]}if(!g.v29){g.v29=1;g.m29=1}}catch(x){}}
+function v29Boot(){try{if(G.m29){G.m29=0;sq23('<h3 style="margin:0">第 29 版</h3><p>• <b>平行世界倒數計時</b>：每輪 12 分鐘，越快擊敗界主，夢蝕漲越多（+3～+9）；剩一半以上另給星燼和首領寶箱。打輸不重設，離線時暫停。</p><p>• 壁壘、嗜血、狩獵節奏、雷弧、血契重做。</p>')}}catch(x){}}
+
+try{CHL.unshift(['v29','2026-11-23','平行世界倒數計時：越快擊敗界主，夢蝕漲越多',['平行世界每輪倒數 12 分鐘，擊敗界主時夢蝕 +3～+9（剩越多加越多）；打輸不重設、離線暫停','剩一半以上擊敗界主：星燼 +1、首領寶箱 +1；世界卡記錄最快擊敗與最高夢蝕；新成就「一半時間」「疾行者」','戰場顯示倒數條和「現在擊敗界主：夢蝕 +N」','元素互動型推薦固定為兩個元素群＋異常群，點數夠才加副型群','血契不扣血：生命高於 60% 鮮血技能傷害 +20%，低於 60% 吸血 +2%','重做：壁壘、嗜血、狩獵節奏、雷弧','DPS 佔比面板說明推薦怎麼算']])}catch(x){}
 /* ===== 啟動 ===== */
 let acc=0,last=performance.now();
 function loop(n){const dt=Math.min(n-last,100)/1000;last=n;try{if(G){acc+=dt*G.set.sp;let c=0;while(acc>=1/60&&c<10){step(1/60);acc-=1/60;c++}if(c>=10)acc=0;draw();uT+=dt;if(uT>.3){uT=0;upd()}}}catch(x){err(x)}requestAnimationFrame(loop)}
 function newGame(w){const cls='無名者';G=mig({cls,name:'無名者',lv:1,xp:0,gold:0,mat:Array(8).fill(0),items:[],eq:Array(12).fill(null),zone:0,zmax:0,kills:0,t:Date.now(),set:{}});P={r:0,hp:0,mp:0,buf:{w:0}};calc();const wc=EQ.map((b,i)=>[b,i]).filter(x=>x[0].s===0&&x[0].wt===(w||'sw')&&!x[0].ex&&x[0].rar<=1).sort((a,b)=>a[0].lv-b[0].lv)[0],wi=genItem(wc?wc[1]:0);G.items.push(wi);G.eq[0]=wi.u;G.codex[wi.id]=1;boot()}
-function boot(){fsz();fsHint();v17Msg();tEndApply();verChk();v19Boot();v20Boot();v21Boot();v22Boot();v23Boot();v24Boot();v25Boot();v26Boot();v27Boot();v28Boot();try{document.body.classList.toggle('nofx',G.set.fx>=2)}catch(e){}updMute();calc();fixSk();calc();initBattle();buildSk();document.body.addEventListener('pointerdown',()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)()}catch(e){}},{once:true});cm();0}
+function boot(){fsz();fsHint();v17Msg();tEndApply();verChk();v19Boot();v20Boot();v21Boot();v22Boot();v23Boot();v24Boot();v25Boot();v26Boot();v27Boot();v28Boot();v29Boot();try{document.body.classList.toggle('nofx',G.set.fx>=2)}catch(e){}updMute();calc();fixSk();calc();initBattle();buildSk();document.body.addEventListener('pointerdown',()=>{try{AC=AC||new (window.AudioContext||window.webkitAudioContext)()}catch(e){}},{once:true});cm();0}
 document.addEventListener('visibilitychange',()=>{if(!G)return;if(document.hidden){G.t=Date.now();sv()}else{offCheck();last=performance.now()}});
 setInterval(()=>{if(G&&!document.hidden){G.t=Date.now();sv()}},5000);addEventListener('pagehide',()=>{if(G){G.t=Date.now();sv()}});
 (async()=>{try{await chooseSlot25()}catch(x){}const s=await ld();if(s){G=mig(s);P={r:0,buf:{w:0}};boot();offCheck()}else{modal(`<h3>覆界之瞳</h3><p>你在灰星海岸醒來，什麼都不記得。身邊只有一把武器，和天上一顆不肯熄滅的星。</p><p><b>選擇起始武器</b>（無職業限制；技能綁定武器類型，之後可隨時換裝，每 6 級獲得一點專精）</p>${[['sw','劍','近戰、毒刃、暗殺、旋刃；敏捷高攻速的近身戰鬥'],['ax','斧','強力斬擊、旋風斬、躍擊；攻擊慢但每擊更重'],['st','法杖','火球、冰霜、閃電、暗影、聖光等元素法術'],['bw','長弓','穿雲箭、毒箭、閃電箭矢、箭雨；遠程風箏']].map(x=>`<button style="width:100%;text-align:left" data-a="newGame" data-p='["${x[0]}"]'><b>${x[1]}</b>　<span class="mu">${x[2]}</span></button>`).join('')}`);$('#md .mod').removeAttribute('data-a');$('#md .mod>div>div:last-child').remove()}
